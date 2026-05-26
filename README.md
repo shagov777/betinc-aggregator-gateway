@@ -35,6 +35,9 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - Adapter contract interfaces for parsing, security validation, normalization, and response mapping.
 - Bitville adapter placeholder that records confirmed raw operation names only.
 - Documentation-derived simulator fixtures for `balance`, `debit`, `credit`, and `cancel`.
+- Development-only raw callback filesystem archive under `data/raw-callbacks/`.
+- Sensitive value redaction for headers and raw bodies before archive persistence.
+- Dry-run replay planning that loads archived callbacks without executing financial actions.
 - Test harness placeholder.
 
 ## Intentionally Not Implemented
@@ -46,5 +49,7 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - No `betinc-core` changes.
 - No connected core client.
 - No production Bitville schemas or response mapping.
+- No replay execution against core or external systems.
+- No database-backed archive.
 
 See `docs/integrations/bitville/open-questions.md` for the contract questions that must be resolved before financial implementation starts.
