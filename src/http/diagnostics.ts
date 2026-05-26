@@ -8,6 +8,7 @@ import type { ProviderHealthTracker, ProviderRegistry, SyncSchedulerPlaceholder 
 import type { SessionRegistry } from "../sessions/index.js";
 import type { CredentialStore } from "../security/index.js";
 import type { IdempotencyStore } from "../idempotency/index.js";
+import type { CoreDryRunTransport } from "../coreClient/index.js";
 
 export type DiagnosticsDependencies = {
   events: GatewayEventEmitter;
@@ -19,6 +20,7 @@ export type DiagnosticsDependencies = {
   sessions?: SessionRegistry;
   credentials?: CredentialStore;
   idempotency?: IdempotencyStore;
+  coreClient?: CoreDryRunTransport;
 };
 
 export function createDiagnosticsRouter({
@@ -30,7 +32,8 @@ export function createDiagnosticsRouter({
   syncScheduler,
   sessions,
   credentials,
-  idempotency
+  idempotency,
+  coreClient
 }: DiagnosticsDependencies): Router {
   const router = Router();
 
@@ -86,6 +89,16 @@ export function createDiagnosticsRouter({
     res.status(200).json({
       developmentOnly: true,
       records: idempotency?.listRecords() ?? []
+    });
+  });
+
+  router.get("/diagnostics/core-client", (_req: Request, res: Response) => {
+    res.status(200).json({
+      developmentOnly: true,
+      connected: coreClient?.connected ?? false,
+      commands: coreClient?.listCommands() ?? [],
+      results: coreClient?.listResults() ?? [],
+      drifts: coreClient?.listDrifts() ?? []
     });
   });
 

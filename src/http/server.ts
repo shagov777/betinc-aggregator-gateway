@@ -10,6 +10,7 @@ import type { ProviderHealthTracker, ProviderRegistry, SyncSchedulerPlaceholder 
 import type { SessionRegistry } from "../sessions/index.js";
 import type { CredentialStore } from "../security/index.js";
 import type { IdempotencyStore } from "../idempotency/index.js";
+import type { CoreDryRunTransport } from "../coreClient/index.js";
 import { correlationIdHeader, correlationIdMiddleware } from "./correlation.js";
 import { createDiagnosticsRouter } from "./diagnostics.js";
 import { createHealthRouter } from "./health.js";
@@ -27,6 +28,7 @@ export type CreateAppOptions = {
   sessions?: SessionRegistry;
   credentials?: CredentialStore;
   idempotency?: IdempotencyStore;
+  coreClient?: CoreDryRunTransport;
 };
 
 type CorrelatedRequest = {
@@ -44,7 +46,8 @@ export function createApp({
   syncScheduler,
   sessions,
   credentials,
-  idempotency
+  idempotency,
+  coreClient
 }: CreateAppOptions): Express {
   const app = express();
 
@@ -64,7 +67,18 @@ export function createApp({
   );
   app.use(createHealthRouter(config));
   app.use(
-    createDiagnosticsRouter({ events, metrics, providers, providerHealth, catalogue, syncScheduler, sessions, credentials, idempotency })
+    createDiagnosticsRouter({
+      events,
+      metrics,
+      providers,
+      providerHealth,
+      catalogue,
+      syncScheduler,
+      sessions,
+      credentials,
+      idempotency,
+      coreClient
+    })
   );
 
   return app;

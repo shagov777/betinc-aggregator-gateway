@@ -9,6 +9,7 @@ import { createProviderHealthTracker, createProviderRegistry, createSyncSchedule
 import { createInMemorySessionRegistry } from "./sessions/index.js";
 import { createInMemoryCredentialStore } from "./security/index.js";
 import { createInMemoryIdempotencyStore } from "./idempotency/index.js";
+import { createCoreDryRunTransport } from "./coreClient/index.js";
 
 const config = loadConfig();
 const logger = createLogger(config);
@@ -29,6 +30,7 @@ const syncScheduler = createSyncSchedulerPlaceholder();
 const sessions = createInMemorySessionRegistry(metrics);
 const credentials = createInMemoryCredentialStore();
 const idempotency = createInMemoryIdempotencyStore(metrics);
+const coreClient = createCoreDryRunTransport(metrics);
 const app = createApp({
   config,
   logger,
@@ -40,7 +42,8 @@ const app = createApp({
   syncScheduler,
   sessions,
   credentials,
-  idempotency
+  idempotency,
+  coreClient
 });
 
 app.listen(config.port, () => {

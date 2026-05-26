@@ -30,7 +30,13 @@ export const gatewayMetricNames = [
   "replay_quarantined",
   "correlation_conflict",
   "payload_conflict",
-  "execution_conflict"
+  "execution_conflict",
+  "core_command_created",
+  "core_command_blocked",
+  "core_timeout_simulated",
+  "core_uncertain_state",
+  "reconciliation_drift_detected",
+  "compensating_action_required"
 ] as const;
 
 export type GatewayMetricName = (typeof gatewayMetricNames)[number];

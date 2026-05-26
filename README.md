@@ -70,6 +70,11 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - Replay disposition scaffolding for allow, block, quarantine, and investigate decisions.
 - Development-only idempotency diagnostics route:
   - `GET /diagnostics/idempotency`
+- Gateway-to-core command contracts for wallet, session, and freespin command shapes.
+- Dry-run core transport that can simulate blocked, accepted, rejected, timeout, and uncertain outcomes without network calls.
+- Core reconciliation drift placeholders and compensating action references.
+- Development-only core-client diagnostics route:
+  - `GET /diagnostics/core-client`
 - Test harness placeholder.
 
 ## Intentionally Not Implemented
@@ -100,5 +105,8 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - No external auth provider calls.
 - No irreversible financial execution from idempotency decisions.
 - No provider-final replay semantics.
+- No real HTTP calls to core.
+- No core ledger posting or wallet mutation.
+- No retry execution against core.
 
 See `docs/integrations/bitville/open-questions.md` for the contract questions that must be resolved before financial implementation starts.
