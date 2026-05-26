@@ -6,7 +6,13 @@ export const gatewayMetricNames = [
   "replay_blocked",
   "security_validation_failed",
   "normalization_blocked",
-  "reconciliation_flagged"
+  "reconciliation_flagged",
+  "provider_sync_started",
+  "provider_sync_completed",
+  "provider_sync_failed",
+  "stale_catalogue_detected",
+  "provider_outage_detected",
+  "provider_health_degraded"
 ] as const;
 
 export type GatewayMetricName = (typeof gatewayMetricNames)[number];

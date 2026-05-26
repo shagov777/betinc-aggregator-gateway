@@ -50,6 +50,13 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - Adapter capability model with schema/API version and compatibility state.
 - Schema evolution helpers for version comparison and breaking-change detection.
 - Bitville normalization placeholder that captures unknown/unsupported fields and returns `normalization_blocked`.
+- In-memory provider registry, provider health tracker, and catalogue sync coordinator scaffolding.
+- Catalogue lifecycle models for aggregator providers, games, categories, snapshots, sync results, and sync issues.
+- Stale catalogue detection and scheduled sync placeholders for retry state, dead letters, and sync locks.
+- Bitville catalogue sync placeholder for documented `providers list`, `categories list`, and `games list` terminology.
+- Development-only provider diagnostics routes:
+  - `GET /diagnostics/providers`
+  - `GET /diagnostics/catalogue`
 - Test harness placeholder.
 
 ## Intentionally Not Implemented
@@ -69,5 +76,8 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - No normalization execution beyond explicit `normalization_blocked` dry-run status.
 - No settlement execution, ledger posting, or irreversible wallet semantics.
 - No final adapter compatibility declaration for Bitville.
+- No live provider catalogue API calls.
+- No game ingestion execution.
+- No cron, worker, or job infrastructure.
 
 See `docs/integrations/bitville/open-questions.md` for the contract questions that must be resolved before financial implementation starts.
