@@ -75,6 +75,12 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - Core reconciliation drift placeholders and compensating action references.
 - Development-only core-client diagnostics route:
   - `GET /diagnostics/core-client`
+- Bitville API request/response contracts for providers, games, token, launch, catalogue, and errors.
+- Bitville sandbox client that builds dry-run requests for `/providers`, `/games`, and `/api/token` without HTTP execution.
+- Bitville timeout, retry, circuit-breaker, and degraded-provider placeholders.
+- Bitville provider/game/launch normalization placeholders while financial normalization remains blocked.
+- Development-only Bitville diagnostics route:
+  - `GET /diagnostics/bitville`
 - Test harness placeholder.
 
 ## Intentionally Not Implemented
@@ -108,5 +114,8 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - No real HTTP calls to core.
 - No core ledger posting or wallet mutation.
 - No retry execution against core.
+- No production Bitville endpoint calls.
+- No real Bitville launch/token runtime behavior.
+- No Bitville wallet mutation or settlement execution.
 
 See `docs/integrations/bitville/open-questions.md` for the contract questions that must be resolved before financial implementation starts.

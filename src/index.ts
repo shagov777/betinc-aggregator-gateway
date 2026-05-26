@@ -4,7 +4,7 @@ import { createApp } from "./http/server.js";
 import { createAdapterRegistry } from "./adapters/registry.js";
 import { createInMemoryGatewayEventEmitter } from "./events/index.js";
 import { createInMemoryMetricsRegistry } from "./metrics/index.js";
-import { bitvilleCapabilities } from "./adapters/bitville/index.js";
+import { bitvilleCapabilities, createBitvilleSandboxClient } from "./adapters/bitville/index.js";
 import { createProviderHealthTracker, createProviderRegistry, createSyncSchedulerPlaceholder } from "./providers/index.js";
 import { createInMemorySessionRegistry } from "./sessions/index.js";
 import { createInMemoryCredentialStore } from "./security/index.js";
@@ -31,6 +31,7 @@ const sessions = createInMemorySessionRegistry(metrics);
 const credentials = createInMemoryCredentialStore();
 const idempotency = createInMemoryIdempotencyStore(metrics);
 const coreClient = createCoreDryRunTransport(metrics);
+const bitville = createBitvilleSandboxClient({ metrics });
 const app = createApp({
   config,
   logger,
@@ -43,7 +44,8 @@ const app = createApp({
   sessions,
   credentials,
   idempotency,
-  coreClient
+  coreClient,
+  bitville
 });
 
 app.listen(config.port, () => {

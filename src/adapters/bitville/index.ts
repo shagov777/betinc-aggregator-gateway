@@ -130,3 +130,37 @@ function unknownProviderFieldsFor(rawBody: unknown): UnknownProviderField[] {
 // Confirmed raw Bitville operation names are listed in docs/integrations/bitville/raw-contract.md.
 // TODO(open-question): exact HTTP paths, methods, request fields, response fields, auth, amount
 // representation, cancel semantics, retry behavior, and promo/freespins behavior remain unresolved.
+export type {
+  BitvilleApiError,
+  BitvilleApiStatus,
+  BitvilleGame,
+  BitvilleGameCatalogueResponse,
+  BitvilleLaunchEnvelope,
+  BitvilleProvider,
+  BitvilleProviderCatalogueResponse,
+  BitvilleTokenRequest,
+  BitvilleTokenResponse
+} from "./apiContracts.js";
+export {
+  createBitvilleSandboxClient,
+  type BitvilleDryRunRequest,
+  type BitvilleSandboxClient,
+  type BitvilleSandboxDiagnostics,
+  type BitvilleSandboxEndpoint
+} from "./sandboxClient.js";
+export {
+  bitvilleCircuitBreakerPlaceholder,
+  bitvilleProviderDegradationPlaceholder,
+  bitvilleRetryPolicyPlaceholder,
+  bitvilleTimeoutPolicyPlaceholder,
+  type BitvilleCircuitBreakerState,
+  type BitvilleProviderDegradation,
+  type BitvilleRetryPolicy,
+  type BitvilleTimeoutPolicy
+} from "./policies.js";
+export {
+  normalizeBitvilleCategoriesPlaceholder,
+  normalizeBitvilleGamesPlaceholder,
+  normalizeBitvilleLaunchPlaceholder,
+  normalizeBitvilleProvidersPlaceholder
+} from "./normalization.js";

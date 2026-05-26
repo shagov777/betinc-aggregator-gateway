@@ -36,7 +36,13 @@ export const gatewayMetricNames = [
   "core_timeout_simulated",
   "core_uncertain_state",
   "reconciliation_drift_detected",
-  "compensating_action_required"
+  "compensating_action_required",
+  "bitville_request_created",
+  "bitville_request_blocked",
+  "bitville_timeout_simulated",
+  "bitville_retry_simulated",
+  "bitville_provider_degraded",
+  "bitville_catalogue_sync_blocked"
 ] as const;
 
 export type GatewayMetricName = (typeof gatewayMetricNames)[number];
