@@ -1,8 +1,11 @@
 import type { CallbackType } from "../domain/index.js";
 
 export const gatewayEventTypes = [
+  "callback.received",
   "archive.completed",
   "archive.failed",
+  "validation.failed",
+  "quarantine.created",
   "replay.requested",
   "replay.blocked",
   "normalization.blocked",
@@ -17,6 +20,8 @@ export type GatewayEventSeverity = "debug" | "info" | "warn" | "error";
 export type ProcessingStage =
   | "received"
   | "archived"
+  | "validation"
+  | "quarantine"
   | "security_validation"
   | "normalization"
   | "replay"

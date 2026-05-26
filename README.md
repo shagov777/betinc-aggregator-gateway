@@ -43,6 +43,9 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - Development-only diagnostics routes:
   - `GET /diagnostics/events`
   - `GET /diagnostics/metrics`
+- Generic raw callback envelope validation that checks only safe transport-level requirements.
+- Dry-run callback processing pipeline that archives, validates, emits events, increments metrics, and stops at normalization blocking.
+- In-memory quarantine store for malformed callback envelopes.
 - Test harness placeholder.
 
 ## Intentionally Not Implemented
@@ -58,5 +61,7 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - No database-backed archive.
 - No production observability backend.
 - No financial event execution pipeline.
+- No Bitville financial field validation.
+- No normalization execution beyond explicit `normalization_blocked` dry-run status.
 
 See `docs/integrations/bitville/open-questions.md` for the contract questions that must be resolved before financial implementation starts.
