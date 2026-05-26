@@ -66,6 +66,10 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - In-memory redacted credential store for `partner_token`, `client_token`, `apiKey`, and `sharedSecret` placeholders.
 - Development-only security diagnostics route:
   - `GET /diagnostics/security`
+- In-memory idempotency store with duplicate detection by correlation ID, external reference, and callback hash.
+- Replay disposition scaffolding for allow, block, quarantine, and investigate decisions.
+- Development-only idempotency diagnostics route:
+  - `GET /diagnostics/idempotency`
 - Test harness placeholder.
 
 ## Intentionally Not Implemented
@@ -94,5 +98,7 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - No final Bitville production auth semantics.
 - No real secrets or persistent credential storage.
 - No external auth provider calls.
+- No irreversible financial execution from idempotency decisions.
+- No provider-final replay semantics.
 
 See `docs/integrations/bitville/open-questions.md` for the contract questions that must be resolved before financial implementation starts.

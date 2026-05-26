@@ -7,6 +7,7 @@ import type { ProviderCatalogueSnapshot } from "../providers/index.js";
 import type { ProviderHealthTracker, ProviderRegistry, SyncSchedulerPlaceholder } from "../providers/index.js";
 import type { SessionRegistry } from "../sessions/index.js";
 import type { CredentialStore } from "../security/index.js";
+import type { IdempotencyStore } from "../idempotency/index.js";
 
 export type DiagnosticsDependencies = {
   events: GatewayEventEmitter;
@@ -17,6 +18,7 @@ export type DiagnosticsDependencies = {
   syncScheduler?: SyncSchedulerPlaceholder;
   sessions?: SessionRegistry;
   credentials?: CredentialStore;
+  idempotency?: IdempotencyStore;
 };
 
 export function createDiagnosticsRouter({
@@ -27,7 +29,8 @@ export function createDiagnosticsRouter({
   catalogue,
   syncScheduler,
   sessions,
-  credentials
+  credentials,
+  idempotency
 }: DiagnosticsDependencies): Router {
   const router = Router();
 
@@ -76,6 +79,13 @@ export function createDiagnosticsRouter({
       developmentOnly: true,
       redacted: true,
       credentials: credentials?.list() ?? []
+    });
+  });
+
+  router.get("/diagnostics/idempotency", (_req: Request, res: Response) => {
+    res.status(200).json({
+      developmentOnly: true,
+      records: idempotency?.listRecords() ?? []
     });
   });
 

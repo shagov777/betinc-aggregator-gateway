@@ -9,6 +9,7 @@ import type { ProviderCatalogueSnapshot } from "../providers/index.js";
 import type { ProviderHealthTracker, ProviderRegistry, SyncSchedulerPlaceholder } from "../providers/index.js";
 import type { SessionRegistry } from "../sessions/index.js";
 import type { CredentialStore } from "../security/index.js";
+import type { IdempotencyStore } from "../idempotency/index.js";
 import { correlationIdHeader, correlationIdMiddleware } from "./correlation.js";
 import { createDiagnosticsRouter } from "./diagnostics.js";
 import { createHealthRouter } from "./health.js";
@@ -25,6 +26,7 @@ export type CreateAppOptions = {
   syncScheduler?: SyncSchedulerPlaceholder;
   sessions?: SessionRegistry;
   credentials?: CredentialStore;
+  idempotency?: IdempotencyStore;
 };
 
 type CorrelatedRequest = {
@@ -41,7 +43,8 @@ export function createApp({
   catalogue,
   syncScheduler,
   sessions,
-  credentials
+  credentials,
+  idempotency
 }: CreateAppOptions): Express {
   const app = express();
 
@@ -60,7 +63,9 @@ export function createApp({
     })
   );
   app.use(createHealthRouter(config));
-  app.use(createDiagnosticsRouter({ events, metrics, providers, providerHealth, catalogue, syncScheduler, sessions, credentials }));
+  app.use(
+    createDiagnosticsRouter({ events, metrics, providers, providerHealth, catalogue, syncScheduler, sessions, credentials, idempotency })
+  );
 
   return app;
 }
