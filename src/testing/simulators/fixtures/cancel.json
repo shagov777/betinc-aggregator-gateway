@@ -1,0 +1,11 @@
+{
+  "_fixtureNotice": "Documentation-derived simulator sample only. This is not production Bitville contract truth.",
+  "rawBitvilleOperation": "cancel",
+  "rawHeaders": {},
+  "rawPayload": {},
+  "openQuestions": [
+    "Exact HTTP method and path are unresolved.",
+    "Exact cancel request and response fields are unresolved.",
+    "Cancel target, timing, and reversal semantics are unresolved."
+  ]
+}

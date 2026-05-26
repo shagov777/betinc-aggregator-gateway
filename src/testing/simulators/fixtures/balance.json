@@ -1,0 +1,11 @@
+{
+  "_fixtureNotice": "Documentation-derived simulator sample only. This is not production Bitville contract truth.",
+  "rawBitvilleOperation": "balance",
+  "rawHeaders": {},
+  "rawPayload": {},
+  "openQuestions": [
+    "Exact HTTP method and path are unresolved.",
+    "Exact balance request and response fields are unresolved.",
+    "Authentication and signing rules are unresolved."
+  ]
+}

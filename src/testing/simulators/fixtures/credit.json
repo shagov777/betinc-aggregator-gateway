@@ -1,0 +1,11 @@
+{
+  "_fixtureNotice": "Documentation-derived simulator sample only. This is not production Bitville contract truth.",
+  "rawBitvilleOperation": "credit",
+  "rawHeaders": {},
+  "rawPayload": {},
+  "openQuestions": [
+    "Exact HTTP method and path are unresolved.",
+    "Exact credit request and response fields are unresolved.",
+    "Credit ordering, settlement, and retry semantics are unresolved."
+  ]
+}

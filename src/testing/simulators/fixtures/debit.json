@@ -1,0 +1,11 @@
+{
+  "_fixtureNotice": "Documentation-derived simulator sample only. This is not production Bitville contract truth.",
+  "rawBitvilleOperation": "debit",
+  "rawHeaders": {},
+  "rawPayload": {},
+  "openQuestions": [
+    "Exact HTTP method and path are unresolved.",
+    "Exact debit request and response fields are unresolved.",
+    "Amount, currency, precision, and idempotency identifiers are unresolved."
+  ]
+}

@@ -31,6 +31,10 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - Request correlation ID middleware.
 - `GET /health` endpoint.
 - Placeholder adapter registry.
+- Gateway-domain TypeScript contracts for callback envelopes, normalized commands, processing states, idempotency decisions, core results, and reconciliation flags.
+- Adapter contract interfaces for parsing, security validation, normalization, and response mapping.
+- Bitville adapter placeholder that records confirmed raw operation names only.
+- Documentation-derived simulator fixtures for `balance`, `debit`, `credit`, and `cancel`.
 - Test harness placeholder.
 
 ## Intentionally Not Implemented
@@ -40,5 +44,7 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - No hardcoded assumptions for unresolved Bitville transaction fields or state transitions.
 - No production service connections.
 - No `betinc-core` changes.
+- No connected core client.
+- No production Bitville schemas or response mapping.
 
 See `docs/integrations/bitville/open-questions.md` for the contract questions that must be resolved before financial implementation starts.
