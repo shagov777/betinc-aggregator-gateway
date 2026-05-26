@@ -7,6 +7,7 @@ import type { GatewayEventEmitter } from "../events/index.js";
 import type { MetricsRegistry } from "../metrics/index.js";
 import type { ProviderCatalogueSnapshot } from "../providers/index.js";
 import type { ProviderHealthTracker, ProviderRegistry, SyncSchedulerPlaceholder } from "../providers/index.js";
+import type { SessionRegistry } from "../sessions/index.js";
 import { correlationIdHeader, correlationIdMiddleware } from "./correlation.js";
 import { createDiagnosticsRouter } from "./diagnostics.js";
 import { createHealthRouter } from "./health.js";
@@ -21,6 +22,7 @@ export type CreateAppOptions = {
   providerHealth?: ProviderHealthTracker;
   catalogue?: ProviderCatalogueSnapshot;
   syncScheduler?: SyncSchedulerPlaceholder;
+  sessions?: SessionRegistry;
 };
 
 type CorrelatedRequest = {
@@ -35,7 +37,8 @@ export function createApp({
   providers,
   providerHealth,
   catalogue,
-  syncScheduler
+  syncScheduler,
+  sessions
 }: CreateAppOptions): Express {
   const app = express();
 
@@ -54,7 +57,7 @@ export function createApp({
     })
   );
   app.use(createHealthRouter(config));
-  app.use(createDiagnosticsRouter({ events, metrics, providers, providerHealth, catalogue, syncScheduler }));
+  app.use(createDiagnosticsRouter({ events, metrics, providers, providerHealth, catalogue, syncScheduler, sessions }));
 
   return app;
 }

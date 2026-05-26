@@ -5,6 +5,7 @@ import type { MetricsRegistry } from "../metrics/index.js";
 import type { CallbackType } from "../domain/index.js";
 import type { ProviderCatalogueSnapshot } from "../providers/index.js";
 import type { ProviderHealthTracker, ProviderRegistry, SyncSchedulerPlaceholder } from "../providers/index.js";
+import type { SessionRegistry } from "../sessions/index.js";
 
 export type DiagnosticsDependencies = {
   events: GatewayEventEmitter;
@@ -13,6 +14,7 @@ export type DiagnosticsDependencies = {
   providerHealth?: ProviderHealthTracker;
   catalogue?: ProviderCatalogueSnapshot;
   syncScheduler?: SyncSchedulerPlaceholder;
+  sessions?: SessionRegistry;
 };
 
 export function createDiagnosticsRouter({
@@ -21,7 +23,8 @@ export function createDiagnosticsRouter({
   providers,
   providerHealth,
   catalogue,
-  syncScheduler
+  syncScheduler,
+  sessions
 }: DiagnosticsDependencies): Router {
   const router = Router();
 
@@ -54,6 +57,14 @@ export function createDiagnosticsRouter({
       developmentOnly: true,
       catalogue: catalogue ?? null,
       scheduler: syncScheduler ?? null
+    });
+  });
+
+  router.get("/diagnostics/sessions", (_req: Request, res: Response) => {
+    res.status(200).json({
+      developmentOnly: true,
+      sessions: sessions?.listSessions() ?? [],
+      lifecycleEvents: sessions?.listEvents() ?? []
     });
   });
 

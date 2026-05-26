@@ -12,7 +12,14 @@ export const gatewayMetricNames = [
   "provider_sync_failed",
   "stale_catalogue_detected",
   "provider_outage_detected",
-  "provider_health_degraded"
+  "provider_health_degraded",
+  "launch_requested",
+  "launch_blocked",
+  "session_created",
+  "session_launched",
+  "session_expired",
+  "session_abandoned",
+  "session_closed"
 ] as const;
 
 export type GatewayMetricName = (typeof gatewayMetricNames)[number];

@@ -57,6 +57,11 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - Development-only provider diagnostics routes:
   - `GET /diagnostics/providers`
   - `GET /diagnostics/catalogue`
+- In-memory game session registry with create, launch, expire, abandon, and close lifecycle transitions.
+- Dry-run launch orchestration that creates a local session and blocks before token generation, wallet checks, core calls, or external Bitville calls.
+- Bitville launch placeholder preserving `/api/token`, `token`, `client_token`, `partner_token`, `provider`, `game`, `demoMode`, and `demoOverlay` terminology.
+- Development-only session diagnostics route:
+  - `GET /diagnostics/sessions`
 - Test harness placeholder.
 
 ## Intentionally Not Implemented
@@ -79,5 +84,8 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - No live provider catalogue API calls.
 - No game ingestion execution.
 - No cron, worker, or job infrastructure.
+- No real Bitville launch calls.
+- No real launch token generation.
+- No launch-time wallet checks.
 
 See `docs/integrations/bitville/open-questions.md` for the contract questions that must be resolved before financial implementation starts.
