@@ -1,9 +1,5 @@
-import type {
-  CallbackType,
-  CoreCommandResult,
-  RawCallbackEnvelope,
-  NormalizedGatewayCommand
-} from "../domain/index.js";
+import type { CallbackType, CoreCommandResult, RawCallbackEnvelope } from "../domain/index.js";
+import type { AdapterCapabilityModel, NormalizationResult } from "../normalization/index.js";
 
 export type RawCallbackParser = {
   parse(input: {
@@ -25,7 +21,7 @@ export type CallbackSecurityValidator = {
 };
 
 export type CallbackNormalizer = {
-  normalize(envelope: RawCallbackEnvelope): Promise<NormalizedGatewayCommand>;
+  normalize(envelope: RawCallbackEnvelope): Promise<NormalizationResult>;
 };
 
 export type ResponseMapper = {
@@ -35,6 +31,7 @@ export type ResponseMapper = {
 export type AggregatorAdapter = {
   name: string;
   status: "placeholder" | "ready";
+  capabilities: AdapterCapabilityModel;
   parser: RawCallbackParser;
   securityValidator: CallbackSecurityValidator;
   normalizer: CallbackNormalizer;

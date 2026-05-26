@@ -46,6 +46,10 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - Generic raw callback envelope validation that checks only safe transport-level requirements.
 - Dry-run callback processing pipeline that archives, validates, emits events, increments metrics, and stops at normalization blocking.
 - In-memory quarantine store for malformed callback envelopes.
+- Canonical normalization DTO contracts for balance, debit, credit, cancel, identity, transaction, and monetary concepts.
+- Adapter capability model with schema/API version and compatibility state.
+- Schema evolution helpers for version comparison and breaking-change detection.
+- Bitville normalization placeholder that captures unknown/unsupported fields and returns `normalization_blocked`.
 - Test harness placeholder.
 
 ## Intentionally Not Implemented
@@ -63,5 +67,7 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - No financial event execution pipeline.
 - No Bitville financial field validation.
 - No normalization execution beyond explicit `normalization_blocked` dry-run status.
+- No settlement execution, ledger posting, or irreversible wallet semantics.
+- No final adapter compatibility declaration for Bitville.
 
 See `docs/integrations/bitville/open-questions.md` for the contract questions that must be resolved before financial implementation starts.
