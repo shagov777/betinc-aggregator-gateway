@@ -10,6 +10,7 @@ import type { CredentialStore } from "../security/index.js";
 import type { IdempotencyStore } from "../idempotency/index.js";
 import type { CoreDryRunTransport } from "../coreClient/index.js";
 import type { BitvilleSandboxClient } from "../adapters/bitville/index.js";
+import type { SimulatorRunner } from "../simulator/index.js";
 
 export type DiagnosticsDependencies = {
   events: GatewayEventEmitter;
@@ -23,6 +24,7 @@ export type DiagnosticsDependencies = {
   idempotency?: IdempotencyStore;
   coreClient?: CoreDryRunTransport;
   bitville?: BitvilleSandboxClient;
+  simulator?: SimulatorRunner;
 };
 
 export function createDiagnosticsRouter({
@@ -36,7 +38,8 @@ export function createDiagnosticsRouter({
   credentials,
   idempotency,
   coreClient,
-  bitville
+  bitville,
+  simulator
 }: DiagnosticsDependencies): Router {
   const router = Router();
 
@@ -109,6 +112,13 @@ export function createDiagnosticsRouter({
     res.status(200).json({
       developmentOnly: true,
       bitville: bitville?.diagnostics() ?? null
+    });
+  });
+
+  router.get("/diagnostics/simulator", (_req: Request, res: Response) => {
+    res.status(200).json({
+      developmentOnly: true,
+      simulator: simulator?.diagnostics() ?? { runs: [] }
     });
   });
 

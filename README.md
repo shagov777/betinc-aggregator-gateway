@@ -81,6 +81,10 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - Bitville provider/game/launch normalization placeholders while financial normalization remains blocked.
 - Development-only Bitville diagnostics route:
   - `GET /diagnostics/bitville`
+- End-to-end local dry-run simulator for launch, duplicates, timeout/retry, replay attack, stale callbacks, provider degradation, normalization blocking, out-of-order callbacks, and uncertain core state.
+- Simulator integration with archive, replay, idempotency, metrics, diagnostics, events, quarantine, Bitville dry-run client, and core dry-run transport.
+- Development-only simulator diagnostics route:
+  - `GET /diagnostics/simulator`
 - Test harness placeholder.
 
 ## Intentionally Not Implemented
@@ -117,5 +121,7 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - No production Bitville endpoint calls.
 - No real Bitville launch/token runtime behavior.
 - No Bitville wallet mutation or settlement execution.
+- No simulator-driven financial mutation.
+- No simulator external HTTP execution.
 
 See `docs/integrations/bitville/open-questions.md` for the contract questions that must be resolved before financial implementation starts.

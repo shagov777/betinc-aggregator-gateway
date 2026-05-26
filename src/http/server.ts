@@ -12,6 +12,7 @@ import type { CredentialStore } from "../security/index.js";
 import type { IdempotencyStore } from "../idempotency/index.js";
 import type { CoreDryRunTransport } from "../coreClient/index.js";
 import type { BitvilleSandboxClient } from "../adapters/bitville/index.js";
+import type { SimulatorRunner } from "../simulator/index.js";
 import { correlationIdHeader, correlationIdMiddleware } from "./correlation.js";
 import { createDiagnosticsRouter } from "./diagnostics.js";
 import { createHealthRouter } from "./health.js";
@@ -31,6 +32,7 @@ export type CreateAppOptions = {
   idempotency?: IdempotencyStore;
   coreClient?: CoreDryRunTransport;
   bitville?: BitvilleSandboxClient;
+  simulator?: SimulatorRunner;
 };
 
 type CorrelatedRequest = {
@@ -50,7 +52,8 @@ export function createApp({
   credentials,
   idempotency,
   coreClient,
-  bitville
+  bitville,
+  simulator
 }: CreateAppOptions): Express {
   const app = express();
 
@@ -81,7 +84,8 @@ export function createApp({
       credentials,
       idempotency,
       coreClient,
-      bitville
+      bitville,
+      simulator
     })
   );
 

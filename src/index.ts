@@ -10,6 +10,9 @@ import { createInMemorySessionRegistry } from "./sessions/index.js";
 import { createInMemoryCredentialStore } from "./security/index.js";
 import { createInMemoryIdempotencyStore } from "./idempotency/index.js";
 import { createCoreDryRunTransport } from "./coreClient/index.js";
+import { createFilesystemRawCallbackArchive } from "./archive/filesystemArchive.js";
+import { createInMemoryQuarantineStore } from "./pipeline/index.js";
+import { createSimulatorRunner } from "./simulator/index.js";
 
 const config = loadConfig();
 const logger = createLogger(config);
@@ -32,6 +35,9 @@ const credentials = createInMemoryCredentialStore();
 const idempotency = createInMemoryIdempotencyStore(metrics);
 const coreClient = createCoreDryRunTransport(metrics);
 const bitville = createBitvilleSandboxClient({ metrics });
+const archive = createFilesystemRawCallbackArchive();
+const quarantine = createInMemoryQuarantineStore();
+const simulator = createSimulatorRunner({ archive, events, metrics, idempotency, bitville, coreClient, quarantine });
 const app = createApp({
   config,
   logger,
@@ -45,7 +51,8 @@ const app = createApp({
   credentials,
   idempotency,
   coreClient,
-  bitville
+  bitville,
+  simulator
 });
 
 app.listen(config.port, () => {

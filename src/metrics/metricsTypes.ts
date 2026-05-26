@@ -42,7 +42,13 @@ export const gatewayMetricNames = [
   "bitville_timeout_simulated",
   "bitville_retry_simulated",
   "bitville_provider_degraded",
-  "bitville_catalogue_sync_blocked"
+  "bitville_catalogue_sync_blocked",
+  "simulator_run_started",
+  "simulator_run_completed",
+  "simulator_failure_simulated",
+  "simulator_replay_executed",
+  "simulator_duplicate_detected",
+  "simulator_timeout_executed"
 ] as const;
 
 export type GatewayMetricName = (typeof gatewayMetricNames)[number];
