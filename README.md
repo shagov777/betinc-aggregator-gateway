@@ -1,0 +1,44 @@
+# BetInc Aggregator Gateway
+
+TypeScript Node.js service foundation for adapting external aggregators into BetInc gateway boundaries.
+
+This repository is intentionally foundation-only at this stage. Bitville financial callbacks, wallet semantics, cancel behavior, promotional/free-spin behavior, and production service connectivity are blocked until the open Bitville contract questions are answered.
+
+## Scripts
+
+```sh
+npm install
+npm run build
+npm test
+npm run dev
+```
+
+## Environment
+
+Copy `.env.example` for local development values. Do not commit real secrets.
+
+| Variable | Purpose |
+| --- | --- |
+| `NODE_ENV` | Runtime mode: `development`, `test`, or `production`. |
+| `PORT` | HTTP port for the service. |
+| `LOG_LEVEL` | Pino log level. |
+| `SERVICE_NAME` | Service name emitted in structured logs. |
+
+## Implemented
+
+- Validated runtime configuration.
+- Structured logger utility.
+- Request correlation ID middleware.
+- `GET /health` endpoint.
+- Placeholder adapter registry.
+- Test harness placeholder.
+
+## Intentionally Not Implemented
+
+- No live Bitville wallet callback handlers.
+- No debit, credit, balance, cancel, promo, or free-spin semantics.
+- No hardcoded assumptions for unresolved Bitville transaction fields or state transitions.
+- No production service connections.
+- No `betinc-core` changes.
+
+See `docs/integrations/bitville/open-questions.md` for the contract questions that must be resolved before financial implementation starts.
