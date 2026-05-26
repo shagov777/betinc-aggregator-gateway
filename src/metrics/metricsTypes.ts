@@ -19,7 +19,12 @@ export const gatewayMetricNames = [
   "session_launched",
   "session_expired",
   "session_abandoned",
-  "session_closed"
+  "session_closed",
+  "security_validation_passed",
+  "replay_risk_detected",
+  "ip_rejected",
+  "stale_request_detected",
+  "timestamp_window_failed"
 ] as const;
 
 export type GatewayMetricName = (typeof gatewayMetricNames)[number];

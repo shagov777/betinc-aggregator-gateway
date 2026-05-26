@@ -62,6 +62,10 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - Bitville launch placeholder preserving `/api/token`, `token`, `client_token`, `partner_token`, `provider`, `game`, `demoMode`, and `demoOverlay` terminology.
 - Development-only session diagnostics route:
   - `GET /diagnostics/sessions`
+- Security/auth boundary scaffolding with generic authorization, IP allowlist, replay-risk, and timestamp-window validators.
+- In-memory redacted credential store for `partner_token`, `client_token`, `apiKey`, and `sharedSecret` placeholders.
+- Development-only security diagnostics route:
+  - `GET /diagnostics/security`
 - Test harness placeholder.
 
 ## Intentionally Not Implemented
@@ -87,5 +91,8 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - No real Bitville launch calls.
 - No real launch token generation.
 - No launch-time wallet checks.
+- No final Bitville production auth semantics.
+- No real secrets or persistent credential storage.
+- No external auth provider calls.
 
 See `docs/integrations/bitville/open-questions.md` for the contract questions that must be resolved before financial implementation starts.

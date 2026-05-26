@@ -7,6 +7,7 @@ import { createInMemoryMetricsRegistry } from "./metrics/index.js";
 import { bitvilleCapabilities } from "./adapters/bitville/index.js";
 import { createProviderHealthTracker, createProviderRegistry, createSyncSchedulerPlaceholder } from "./providers/index.js";
 import { createInMemorySessionRegistry } from "./sessions/index.js";
+import { createInMemoryCredentialStore } from "./security/index.js";
 
 const config = loadConfig();
 const logger = createLogger(config);
@@ -25,7 +26,8 @@ providers.register({
 const providerHealth = createProviderHealthTracker(providers, metrics);
 const syncScheduler = createSyncSchedulerPlaceholder();
 const sessions = createInMemorySessionRegistry(metrics);
-const app = createApp({ config, logger, adapters, events, metrics, providers, providerHealth, syncScheduler, sessions });
+const credentials = createInMemoryCredentialStore();
+const app = createApp({ config, logger, adapters, events, metrics, providers, providerHealth, syncScheduler, sessions, credentials });
 
 app.listen(config.port, () => {
   logger.info({ port: config.port }, "aggregator gateway listening");

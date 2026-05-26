@@ -6,6 +6,7 @@ import type { CallbackType } from "../domain/index.js";
 import type { ProviderCatalogueSnapshot } from "../providers/index.js";
 import type { ProviderHealthTracker, ProviderRegistry, SyncSchedulerPlaceholder } from "../providers/index.js";
 import type { SessionRegistry } from "../sessions/index.js";
+import type { CredentialStore } from "../security/index.js";
 
 export type DiagnosticsDependencies = {
   events: GatewayEventEmitter;
@@ -15,6 +16,7 @@ export type DiagnosticsDependencies = {
   catalogue?: ProviderCatalogueSnapshot;
   syncScheduler?: SyncSchedulerPlaceholder;
   sessions?: SessionRegistry;
+  credentials?: CredentialStore;
 };
 
 export function createDiagnosticsRouter({
@@ -24,7 +26,8 @@ export function createDiagnosticsRouter({
   providerHealth,
   catalogue,
   syncScheduler,
-  sessions
+  sessions,
+  credentials
 }: DiagnosticsDependencies): Router {
   const router = Router();
 
@@ -65,6 +68,14 @@ export function createDiagnosticsRouter({
       developmentOnly: true,
       sessions: sessions?.listSessions() ?? [],
       lifecycleEvents: sessions?.listEvents() ?? []
+    });
+  });
+
+  router.get("/diagnostics/security", (_req: Request, res: Response) => {
+    res.status(200).json({
+      developmentOnly: true,
+      redacted: true,
+      credentials: credentials?.list() ?? []
     });
   });
 
