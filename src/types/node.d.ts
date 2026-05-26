@@ -22,3 +22,12 @@ declare module "node:path" {
 declare module "node:os" {
   export function tmpdir(): string;
 }
+
+declare const URL: {
+  new (url: string): {
+    searchParams: {
+      set(name: string, value: string): void;
+    };
+    toString(): string;
+  };
+};

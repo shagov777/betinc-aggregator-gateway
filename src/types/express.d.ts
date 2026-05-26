@@ -3,6 +3,7 @@ declare module "express" {
 
   export type Request = {
     correlationId?: string;
+    query: Record<string, string | string[] | undefined>;
     header(name: string): string | undefined;
   };
 

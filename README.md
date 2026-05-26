@@ -38,6 +38,11 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - Development-only raw callback filesystem archive under `data/raw-callbacks/`.
 - Sensitive value redaction for headers and raw bodies before archive persistence.
 - Dry-run replay planning that loads archived callbacks without executing financial actions.
+- In-memory gateway processing event stream with correlation-aware querying.
+- In-memory metrics counters for callback, archive, replay, security, normalization, and reconciliation milestones.
+- Development-only diagnostics routes:
+  - `GET /diagnostics/events`
+  - `GET /diagnostics/metrics`
 - Test harness placeholder.
 
 ## Intentionally Not Implemented
@@ -51,5 +56,7 @@ Copy `.env.example` for local development values. Do not commit real secrets.
 - No production Bitville schemas or response mapping.
 - No replay execution against core or external systems.
 - No database-backed archive.
+- No production observability backend.
+- No financial event execution pipeline.
 
 See `docs/integrations/bitville/open-questions.md` for the contract questions that must be resolved before financial implementation starts.
